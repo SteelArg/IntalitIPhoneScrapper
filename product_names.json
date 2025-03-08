@@ -1,0 +1,30 @@
+{
+    "Type" : [
+        "phone",
+        "pc",
+        "laptop"
+    ],
+    "Company" : [
+        "apple",
+        "microsoft",
+        "android",
+        "samsung",
+        "xiaomi"
+    ],
+    "Product" : [
+        "iphone>Type=phone;Company=apple",
+        "android>Type=phone;Company=android",
+        "galaxy>Type=phone;Company=samsung",
+        "redmi>Type=phone;Company=xiaomi"
+    ],
+    "Line" : [
+        "default",
+        "note>Product=redmi;Type=phone;Company=xiaomi"
+    ],
+    "Series" : [
+        "default",
+        "pro",
+        "s",
+        "a"
+    ]
+}

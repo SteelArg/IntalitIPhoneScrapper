@@ -1,0 +1,13 @@
+# Flask
+Flask
+Flask-RESTful
+
+# Scrapping
+beautifulsoup4
+requests
+
+# Schedule
+schedule
+
+# Telegram
+pytelegrambotapi
