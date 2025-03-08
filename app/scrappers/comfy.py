@@ -1,4 +1,4 @@
-from src.scrappers.scrapper import Scrapper
+from app.scrappers.scrapper import Scrapper
 import json
 
 

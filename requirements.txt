@@ -1,13 +1,12 @@
 # Flask
-Flask
-Flask-RESTful
+Flask~=3.1.0
 
 # Scrapping
-beautifulsoup4
-requests
+beautifulsoup4~=4.12.3
+requests~=2.32.3
 
 # Schedule
-schedule
+schedule~=1.2.2
 
 # Telegram
-pytelegrambotapi
+telebot
