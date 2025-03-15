@@ -3,15 +3,13 @@ import schedule
 
 from web_scrapper import scrape_product_link
 from database import Database
+from app.config import get_db_path, scrape_links
 
-with open("scrape_links.txt", "r", encoding="utf-8") as file:
-    links = file.read().split("\n")
-
-db = Database("products.db")
+db = Database(get_db_path())
 
 
 def scrape_links_job():
-    for link in links:
+    for link in scrape_links:
         product = scrape_product_link(link)
         if product is None:
             print(f"Failed to scrape link: {link}")

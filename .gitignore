@@ -5,7 +5,7 @@ UML/*
 
 logs/*
 
-telegram_bot_token.txt
+config/telegram_bot_token.txt
 *.db
 
 **/__pycache__/*

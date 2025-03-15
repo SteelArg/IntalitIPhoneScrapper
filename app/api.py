@@ -3,11 +3,12 @@ from flask import Flask
 from flask_restful import Api, Resource
 
 from database import Database
+from app.config import get_db_path, web_api_flask_port
 
 app = Flask(__name__)
 api = Api(app)
 
-db = Database("products.db")
+db = Database(get_db_path())
 
 
 class ProductDataRequest(Resource):
@@ -46,7 +47,7 @@ api.add_resource(StoreDataRequest, "/data/store/<string:store>")
 
 
 def run_flask():
-    app.run(debug=True, port=5002)
+    app.run(debug=True, port=web_api_flask_port)
 
 
 if __name__ == "__main__":

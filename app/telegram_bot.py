@@ -1,15 +1,12 @@
 import telebot
 import requests
 
-with open("telegram_bot_token.txt", "r", encoding="utf-8") as file:
-    token = file.read()
+from app.config import stores, get_telegram_bot_token, web_api_url
 
-bot = telebot.TeleBot(token)
-
-stores = ["rozetka", "moyo", "ctrs", "comfy", "foxtrot"]
+bot = telebot.TeleBot(get_telegram_bot_token())
 
 # Url pointing to your Web API
-url = "https://steelarg.pythonanywhere.com"
+url = web_api_url
 
 
 def get_all_products(store: str):

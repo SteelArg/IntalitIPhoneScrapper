@@ -32,7 +32,7 @@ def scrape_product_link(link: str):
 
     product = {
         "name": scrapper.name,
-        "price": scrapper.price,
+        "price": float(scrapper.price),
         "store": scrapper.store
     }
 

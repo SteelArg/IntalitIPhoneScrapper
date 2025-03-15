@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+from app.config import get_logs_dir
+
 
 default_headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
@@ -25,7 +27,7 @@ class Scrapper:
     def load(self):
         response = requests.get(self.url, headers=self.headers)
         self.soup = BeautifulSoup(response.text, "html.parser")
-        with open(f"logs\\scraps\\{self.store}-scrape-log.txt", "w", encoding="utf-8") as file:
+        with open(f"{get_logs_dir()}\\scraps\\{self.store}-scrape-log.txt", "w", encoding="utf-8") as file:
             file.write(response.text)
 
     def display(self):

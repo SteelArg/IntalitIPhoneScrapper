@@ -1,6 +1,8 @@
 import sqlite3
 import time
 
+from app.config import stores
+
 
 # Get current date and time as a string
 def get_current_date():
@@ -22,10 +24,6 @@ def check_parameters(store: str, price=1.0):
         raise ValueError(f"Store {store} does not exist")
     if price <= 0:
         raise ValueError(f"Price must be higher than 0 ({price})")
-
-
-# IDs for ukrainian stores with products
-stores = ["rozetka", "comfy", "ctrs", "moyo", "foxtrot"]
 
 
 class Database:

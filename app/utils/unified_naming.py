@@ -1,6 +1,8 @@
 from difflib import SequenceMatcher
 import math
 
+from app.config import load_product_names
+
 # Unified product name:
 # Type-Company-Product-Series-Number
 
@@ -11,10 +13,8 @@ keywords = ["Type", "Company", "Product", "Line", "Series"]
 
 
 class ProductNamesReader:
-    def __init__(self, path):
-        file = open(path, "r")
-        self.data = eval(file.read())
-        file.close()
+    def __init__(self):
+        self.data = load_product_names()
 
     def get_values_for(self, keyword: str):
         values = self.data[keyword]
@@ -48,7 +48,7 @@ class ProductNamesReader:
         return product_data
 
 
-reader = ProductNamesReader("product_names.json")
+reader = ProductNamesReader()
 
 
 def get_unified_name_as_str(full_name):
