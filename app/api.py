@@ -1,6 +1,6 @@
 import flask
 from flask import Flask
-from flask_restful import Api, reqparse, Resource
+from flask_restful import Api, Resource
 
 from database import Database
 

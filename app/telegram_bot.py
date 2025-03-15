@@ -8,6 +8,7 @@ bot = telebot.TeleBot(token)
 
 stores = ["rozetka", "moyo", "ctrs", "comfy", "foxtrot"]
 
+# Url pointing to your Web API
 url = "https://steelarg.pythonanywhere.com"
 
 

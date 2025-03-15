@@ -4,7 +4,7 @@ from scrappers.moyo import MoyoScrapper
 from scrappers.foxtrot import FoxtrotScrapper
 from scrappers.ctrs import CtrsScrapper
 
-from unified_naming import get_unified_name_as_str
+from utils.unified_naming import get_unified_name_as_str
 
 
 def scrape_product_link(link: str):

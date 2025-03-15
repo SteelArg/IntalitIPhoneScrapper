@@ -1,6 +1,11 @@
 UML/*
-telegram_bot_token.txt
+
 .venv/*
 .idea/*
+
 logs/*
+
+telegram_bot_token.txt
+*.db
+
 **/__pycache__/*

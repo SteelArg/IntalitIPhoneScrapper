@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from database import Database
+from app.database import Database
 
 
 class TestDatabase(unittest.TestCase):
