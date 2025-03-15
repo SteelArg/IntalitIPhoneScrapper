@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from app.config import get_logs_dir
+from app.configuration import get_logs_dir
 
 
 default_headers = {

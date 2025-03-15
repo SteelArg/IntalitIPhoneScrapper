@@ -1,7 +1,7 @@
 import telebot
 import requests
 
-from app.config import stores, get_telegram_bot_token, web_api_url
+from configuration import stores, get_telegram_bot_token, web_api_url
 
 bot = telebot.TeleBot(get_telegram_bot_token())
 

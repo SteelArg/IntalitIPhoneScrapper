@@ -3,7 +3,7 @@ import schedule
 
 from web_scrapper import scrape_product_link
 from database import Database
-from app.config import get_db_path, scrape_links
+from configuration import get_db_path, scrape_links
 
 db = Database(get_db_path())
 

@@ -1,7 +1,7 @@
 import sqlite3
 import time
 
-from app.config import stores
+from configuration import stores
 
 
 # Get current date and time as a string

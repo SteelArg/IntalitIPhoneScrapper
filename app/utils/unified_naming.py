@@ -1,7 +1,7 @@
 from difflib import SequenceMatcher
 import math
 
-from app.config import load_product_names
+from app.configuration import load_product_names
 
 # Unified product name:
 # Type-Company-Product-Series-Number
