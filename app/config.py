@@ -21,7 +21,6 @@ stores = config_data["stores"]
 logs_dir = f"{abs_path}\\logs"
 
 web_api_url = config_data["web_api_url"]
-web_api_flask_port = config_data["web_api_flask_port"]
 
 
 def get_db_path():

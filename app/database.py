@@ -67,8 +67,10 @@ class Database:
             return None
         else:
             data = {
-                "name": name, "store": store,
-                "price": float(fetch[0][1]), "date": fetch[0][2]
+                "name": name,
+                "store": store,
+                "price": float(fetch[0][1]),
+                "date": fetch[0][2]
             }
             return data
 

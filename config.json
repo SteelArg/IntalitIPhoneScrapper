@@ -7,6 +7,5 @@
 
   "stores" : ["rozetka", "comfy", "ctrs", "moyo", "foxtrot"],
 
-  "web_api_url" : "https://steelarg.pythonanywhere.com",
-  "web_api_flask_port" : 5062
+  "web_api_url" : "https://steelarg.pythonanywhere.com"
 }
