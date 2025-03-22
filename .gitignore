@@ -4,6 +4,7 @@ UML/*
 .idea/*
 
 logs/*
+*.log
 
 config/telegram_bot_token.txt
 *.db

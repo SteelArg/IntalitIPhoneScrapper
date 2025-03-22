@@ -1,5 +1,5 @@
 from difflib import SequenceMatcher
-import math
+import logging
 
 from app.configuration import load_product_names
 
@@ -10,6 +10,12 @@ from app.configuration import load_product_names
 # Color-Memory
 
 keywords = ["Type", "Company", "Product", "Line", "Series"]
+
+logging.basicConfig(level=logging.INFO, filename="unified_naming.log", filemode="w")
+
+
+class UnifiedNamingException(Exception):
+    pass
 
 
 class ProductNamesReader:
@@ -36,9 +42,14 @@ class ProductNamesReader:
                         new_data[derived_value.split("=")[0]] = derived_value.split("=")[1]
 
         for key in keywords:
-            if key in product_data.keys() or key not in new_data.keys():
+            if key not in new_data.keys():
+                continue
+            if key in product_data.keys():
+                if product_data[key] != new_data[key]:
+                    logging.warning(f"Conflicting info: Original - {product_data[key]}; Filled - {new_data[key]}")
                 continue
             product_data[key] = new_data[key]
+            logging.info(f"Filled {key} with {new_data[key]}")
 
         if "Series" not in product_data.keys():
             product_data["Series"] = self.get_values_for("Series")[0]
@@ -55,15 +66,15 @@ def get_unified_name_as_str(full_name):
     data = get_unified_name(full_name)
     try:
         format_name = f"{data['Type']}-{data['Company']}-{data['Product']}-{data['Line']}-{data['Series']}-{data['Number']}"
-        return format_name
-    except Exception as e:
-        print("ERROR:\n" + str(data))
-        return "UNIFIED NAMING ERROR"
+    except KeyError:
+        logging.error(f"Failed to create formatted string.\nRequest: {full_name}\nData: {data}")
+        raise UnifiedNamingException(f"Not enough info to create a formatted string for '{full_name}': {data}")
+    return format_name
 
 
 def get_unified_name(full_name: str):
     full_name = full_name.lower()
-    data = {"Number": 0}
+    data = {"Number": "0"}
     for word in full_name.split(" "):
         word_value = eval_word(word)
         if word_value[2] is True:
@@ -87,7 +98,9 @@ def eval_word(word: str):
     data[2] = data[2] > 0.7
 
     if word_only_letters.__len__() < 2 and word_only_numbers.__len__() > 0:
-        data = ["Number", int(word_only_numbers), True]
+        data = ["Number", word_only_numbers, True]
+
+    logging.info(f"Evaluated {word} as: {data}")
 
     return data
 
