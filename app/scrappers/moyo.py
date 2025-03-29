@@ -7,7 +7,7 @@ class MoyoScrapper(Scrapper):
         self.store = "moyo"
 
     def scrape(self):
-        super().load()
+        super().scrape()
 
         title_tag = self.soup.find("meta", {"property": "og:title"})
         if title_tag:

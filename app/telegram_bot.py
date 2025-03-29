@@ -1,9 +1,9 @@
 import telebot
 import requests
 
-from configuration import stores, get_telegram_bot_token, web_api_url
+from configuration import stores, telegram_bot_token, web_api_url
 
-bot = telebot.TeleBot(get_telegram_bot_token())
+bot = telebot.TeleBot(telegram_bot_token())
 
 # Url pointing to your Web API
 url = web_api_url

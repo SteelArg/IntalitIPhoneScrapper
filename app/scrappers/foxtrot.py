@@ -16,7 +16,7 @@ class FoxtrotScrapper(Scrapper):
         self.headers = foxtrot_headers
 
     def scrape(self):
-        super().load()
+        super().scrape()
 
         script = self.soup.find("script", {"type": "application/ld+json"})
         if script:

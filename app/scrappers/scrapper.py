@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from app.configuration import get_logs_dir
+from app.utils.logger import get_logger
 
 
 default_headers = {
@@ -20,15 +20,16 @@ class Scrapper:
         self.store = None
         self.name = None
         self.price = None
+        self.logger = None
 
     def scrape(self):
+        self.logger = get_logger(f"{self.store}-scrape")
         self.load()
 
     def load(self):
         response = requests.get(self.url, headers=self.headers)
         self.soup = BeautifulSoup(response.text, "html.parser")
-        with open(f"{get_logs_dir()}\\scraps\\{self.store}-scrape-log.txt", "w", encoding="utf-8") as file:
-            file.write(response.text)
+        self.logger.info(response.text)
 
     def display(self):
         print(f"{self.name} from store {self.store} with price {self.price}")

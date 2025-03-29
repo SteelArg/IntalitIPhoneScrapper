@@ -25,7 +25,7 @@ def scrape_product_link(link: str):
 
     scrapper.scrape()
 
-    if scrapper.price == 0:
+    if scrapper.price == 0 or scrapper.name is None:
         return None
 
     scrapper.name = get_unified_name_as_str(scrapper.name)

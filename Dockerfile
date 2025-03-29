@@ -1,12 +1,12 @@
 FROM python:3.11
 
-WORKDIR /flask-app
+WORKDIR /app
 
-COPY requirements.txt /flask-app/
+COPY requirements.txt /app/
 
-COPY app/api.py app/database.py app/configuration.py /flask-app/
-COPY config.json /flask-app/
-COPY config /flask-app/config/
+# COPY app/api.py app/database.py app/configuration.py /flask-app/app/
+COPY config.json /app/
+COPY config/ /app/config/
 
 RUN pip install -r requirements.txt
 

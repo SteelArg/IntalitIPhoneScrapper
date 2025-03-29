@@ -1,17 +1,12 @@
 from difflib import SequenceMatcher
-import logging
 
-from app.configuration import load_product_names
+from app.configuration import product_names
+from app.utils.logger import get_logger
 
-# Unified product name:
-# Type-Company-Product-Series-Number
-
-# Additional:
-# Color-Memory
 
 keywords = ["Type", "Company", "Product", "Line", "Series"]
 
-logging.basicConfig(level=logging.INFO, filename="unified_naming.log", filemode="w")
+logger = get_logger("unified_naming")
 
 
 class UnifiedNamingException(Exception):
@@ -20,7 +15,7 @@ class UnifiedNamingException(Exception):
 
 class ProductNamesReader:
     def __init__(self):
-        self.data = load_product_names()
+        self.data = product_names
 
     def get_values_for(self, keyword: str):
         values = self.data[keyword]
@@ -46,10 +41,10 @@ class ProductNamesReader:
                 continue
             if key in product_data.keys():
                 if product_data[key] != new_data[key]:
-                    logging.warning(f"Conflicting info: Original - {product_data[key]}; Filled - {new_data[key]}")
+                    logger.warning(f"Conflicting info: Original - {product_data[key]}; Filled - {new_data[key]}")
                 continue
             product_data[key] = new_data[key]
-            logging.info(f"Filled {key} with {new_data[key]}")
+            logger.info(f"Filled {key} with {new_data[key]}")
 
         if "Series" not in product_data.keys():
             product_data["Series"] = self.get_values_for("Series")[0]
@@ -67,7 +62,7 @@ def get_unified_name_as_str(full_name):
     try:
         format_name = f"{data['Type']}-{data['Company']}-{data['Product']}-{data['Line']}-{data['Series']}-{data['Number']}"
     except KeyError:
-        logging.error(f"Failed to create formatted string.\nRequest: {full_name}\nData: {data}")
+        logger.error(f"Failed to create formatted string.\nRequest: {full_name}\nData: {data}")
         raise UnifiedNamingException(f"Not enough info to create a formatted string for '{full_name}': {data}")
     return format_name
 
@@ -100,7 +95,7 @@ def eval_word(word: str):
     if word_only_letters.__len__() < 2 and word_only_numbers.__len__() > 0:
         data = ["Number", word_only_numbers, True]
 
-    logging.info(f"Evaluated {word} as: {data}")
+    logger.info(f"Evaluated {word} as: {data}")
 
     return data
 

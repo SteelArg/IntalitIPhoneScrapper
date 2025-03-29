@@ -16,7 +16,7 @@ class CtrsScrapper(Scrapper):
         self.headers = ctrs_headers
 
     def scrape(self):
-        super().load()
+        super().scrape()
 
         price_element = self.soup.find("div", class_="Price_price__KKCnw")
         if price_element:

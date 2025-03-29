@@ -1,21 +1,29 @@
 import time
+
+import requests
 import schedule
+from utils.logger import get_logger
 
 from web_scrapper import scrape_product_link
 from database import Database
-from configuration import get_db_path, scrape_links
+from configuration import get_db_path, scrape_links, web_api_url
 
 db = Database(get_db_path())
 
+logger = get_logger("scheduler")
+
 
 def scrape_links_job():
+    logger.info("Scrape links started")
     for link in scrape_links:
         product = scrape_product_link(link)
         if product is None:
-            print(f"Failed to scrape link: {link}")
+            logger.error(f"Failed to scrape link: {link}")
             continue
-        db.insert_product(product["store"], product["name"], product["price"])
-    print("Scraped links")
+
+        post_request = requests.post(f"{web_api_url}/data/product/{product['store']}", data=product)
+        logger.info(f"Post Request to API: {post_request.status_code}")
+    logger.info("Scrape links finished")
 
 
 def main_loop():

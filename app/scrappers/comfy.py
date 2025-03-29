@@ -17,7 +17,7 @@ class ComfyScrapper(Scrapper):
         self.headers = comfy_headers
 
     def scrape(self):
-        super().load()
+        super().scrape()
 
         script_tag = self.soup.find("script", type="application/ld+json")
         if script_tag:
