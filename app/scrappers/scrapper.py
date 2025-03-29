@@ -16,6 +16,7 @@ class Scrapper:
     def __init__(self, product_url, headers=default_headers):
         self.url = product_url
         self.headers = headers
+        self.response = None
         self.soup = None
         self.store = None
         self.name = None
@@ -27,9 +28,20 @@ class Scrapper:
         self.load()
 
     def load(self):
-        response = requests.get(self.url, headers=self.headers)
-        self.soup = BeautifulSoup(response.text, "html.parser")
-        self.logger.info(response.text)
+        try:
+            self.response = requests.get(self.url, headers=self.headers)
+
+            if not self.response.status_code == 200:
+                return
+
+            self.soup = BeautifulSoup(self.response.text, "html.parser")
+            self.logger.info(self.response.text)
+
+        except requests.exceptions.RequestException as e:
+            self.logger.error(f"Bad request: {e}")
+
+    def is_scrape_valid(self):
+        return self.response.status_code == 200 and self.name is not None and self.price is not None
 
     def display(self):
         print(f"{self.name} from store {self.store} with price {self.price}")
