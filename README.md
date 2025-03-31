@@ -8,7 +8,7 @@ This app consists of 3 components:
 
 ## Web API
 
-Uses Flask REST API. Run `api.py` to start a Flask server.
+Uses Flask REST API. Run `run_flask.py` to start a Flask server.
 
 Starts a **Web Server** with **API** and a **Database**
 
@@ -19,16 +19,14 @@ Run `test_database.py` to test the datatbase.
 
 ## Telegram bot
 
-Add a secret file `telegram_bot_token.txt` containing your Telegram Bot Token to the `config` folder. Run `telegram_bot.py`
+Add a secret file `telegram_bot_token.txt` containing your Telegram Bot Token to the `config` folder. Run `run_telebot.py`
 
 Launches a **Telegram Bot** that allows users to interact with a **Web API**.
 
 
 ## Scrapper
 
-Run `scheduler.py` to start a script that **scrapes** all the links in a `config/scrape_links.txt` every day and sends the data to the **Web API**.
-
-Run `main.py` to scrape all the link just once.
+Run `run_scrapper.py` to start a script that **scrapes** all the links in a `config/scrape_links.txt` every day and sends the data to the **Web API**.
 
 ### Scrapper Tests
 
