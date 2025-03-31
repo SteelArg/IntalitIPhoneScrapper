@@ -2,11 +2,11 @@ import time
 
 import requests
 import schedule
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 
-from web_scrapper import scrape_product_link
-from database import Database
-from configuration import get_db_path, scrape_links, web_api_url
+from app.web_scrapper import scrape_product_link
+from app.database import Database
+from app.configuration import get_db_path, scrape_links, web_api_url
 
 db = Database(get_db_path())
 
@@ -32,7 +32,3 @@ def main_loop():
     while True:
         schedule.run_pending()
         time.sleep(60)
-
-
-if __name__ == "__main__":
-    main_loop()

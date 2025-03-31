@@ -25,9 +25,3 @@ class FoxtrotScrapper(Scrapper):
                 variant = data["hasVariant"][0]
                 self.name = variant.get("name", "Не вказано")
                 self.price = variant.get("offers", {}).get("price", 0)
-            else:
-                self.name = "Не вказано"
-                self.price = 0
-        else:
-            self.name = "Не вказано"
-            self.price = 0

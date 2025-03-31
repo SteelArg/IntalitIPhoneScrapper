@@ -2,8 +2,8 @@ import flask
 from flask import Flask
 from flask_restful import Api, Resource
 
-from database import Database
-from configuration import get_db_path
+from app.database import Database
+from app.configuration import get_db_path
 
 app = Flask(__name__)
 api = Api(app)
@@ -49,6 +49,3 @@ api.add_resource(StoreDataRequest, "/data/store/<string:store>")
 def run_flask():
     app.run(port=5050, debug=True)
 
-
-if __name__ == "__main__":
-    run_flask()

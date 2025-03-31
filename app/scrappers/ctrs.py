@@ -21,11 +21,7 @@ class CtrsScrapper(Scrapper):
         price_element = self.soup.find("div", class_="Price_price__KKCnw")
         if price_element:
             self.price = price_element.get("data-price", 0)
-        else:
-            self.price = 0
 
         title_meta = self.soup.find("meta", {"property": "og:title"})
         if title_meta:
             self.name = title_meta.get("content", "Назва не знайдена")
-        else:
-            self.name = "Назва не знайдена"

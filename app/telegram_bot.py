@@ -1,9 +1,9 @@
 import telebot
 import requests
 
-from telebot.types import InlineKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from configuration import stores, telegram_bot_token, web_api_url
+from app.configuration import stores, telegram_bot_token, web_api_url
 
 bot = telebot.TeleBot(telegram_bot_token)
 
@@ -43,10 +43,9 @@ def read_from_store(call):
     store_name = call.data.split("=")[1]
     products_text = ""
     products_data = get_all_products(store_name)
-    products_text = str(products_data)
 
-    #for product in products_data:
-    #    products_text += f"\n{product['name']} {str(product['price'])} грн; последн. счит. {str(product['date'])}"
+    for product in products_data:
+        products_text += f"\n{product['name']} {str(product['price'])} грн; последн. счит. {str(product['date'])}"
     if products_text == "":
         products_text = "\nПока что нету :("
 
@@ -55,7 +54,3 @@ def read_from_store(call):
 
 def run_telegram_bot():
     bot.polling(non_stop=True)
-
-
-if __name__ == "__main__":
-    run_telegram_bot()

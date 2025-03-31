@@ -1,13 +1,7 @@
 import os
 
-file_dir = os.path.dirname(os.path.abspath(__file__))
-abs_path = file_dir
-
-if not os.path.isfile(os.path.join(abs_path, "config.json")):
-    abs_path = os.path.join(abs_path, os.pardir)
-
+abs_path = os.getcwd()
 config_path = os.path.join(abs_path, "config")
-
 logs_path = os.path.join(abs_path, "logs")
 
 telegram_bot_token = ""

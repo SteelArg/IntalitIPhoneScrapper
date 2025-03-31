@@ -16,5 +16,3 @@ class MoyoScrapper(Scrapper):
         price_tag = self.soup.find("meta", {"itemprop": "price"})
         if price_tag:
             self.price = price_tag["content"]
-        else:
-            self.price = 0

@@ -1,10 +1,10 @@
-from scrappers.rozetka import RozetkaScrapper
-from scrappers.comfy import ComfyScrapper
-from scrappers.moyo import MoyoScrapper
-from scrappers.foxtrot import FoxtrotScrapper
-from scrappers.ctrs import CtrsScrapper
+from app.scrappers.rozetka import RozetkaScrapper
+from app.scrappers.comfy import ComfyScrapper
+from app.scrappers.moyo import MoyoScrapper
+from app.scrappers.foxtrot import FoxtrotScrapper
+from app.scrappers.ctrs import CtrsScrapper
 
-from utils.unified_naming import get_unified_name_as_str
+from app.utils.unified_naming import get_unified_name_as_str
 
 
 def scrape_product_link(link: str):
@@ -25,7 +25,7 @@ def scrape_product_link(link: str):
 
     scrapper.scrape()
 
-    if scrapper.price == 0 or scrapper.name is None:
+    if not scrapper.is_scrape_valid():
         return None
 
     scrapper.name = get_unified_name_as_str(scrapper.name)
