@@ -1,7 +1,7 @@
 import sqlite3
 import time
 
-from configuration import stores
+from app.configuration import stores
 
 
 # Get current date and time as a string
@@ -77,9 +77,15 @@ class Database:
     def get_all_products(self, store):
         check_parameters(store)
 
-        self.cur.execute(f"SELECT * FROM {store}")
-        fetch = self.cur.fetchall()
-        return fetch
+        product_names = [name[0] for name in self.cur.execute(f"SELECT name FROM {store}")]
+        product_names = list(dict.fromkeys(product_names))
+
+        all_products = []
+
+        for product_name in product_names:
+            all_products.append(self.get_product(store, product_name))
+
+        return all_products
 
     def delete_product(self, store, name):
         check_parameters(store)

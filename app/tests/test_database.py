@@ -1,3 +1,4 @@
+import os
 import time
 import unittest
 
@@ -6,7 +7,11 @@ from app.database import Database
 
 class TestDatabase(unittest.TestCase):
     def setUp(self):
-        self.db = Database("test_db.db")
+        db_path = "test_db.db"
+        if os.path.exists(db_path):
+            os.remove(db_path)
+
+        self.db = Database(db_path)
 
     def test_insert_product(self):
         self.db.insert_product("comfy", "product-1", 100.0)
@@ -31,3 +36,15 @@ class TestDatabase(unittest.TestCase):
             self.db.insert_product("comfy", "product", -20.0)
 
         self.assertEqual(self.db.get_product("comfy", "unexisting"), None)
+
+    def test_get_store(self):
+        self.db.insert_product("moyo", "product-1", 200.0)
+        time.sleep(1)
+        self.db.insert_product("moyo", "product-1", 234.0)
+        self.db.insert_product("moyo", "product-2", 501.0)
+
+        all_products = self.db.get_all_products("moyo")
+
+        self.assertEqual(all_products.__len__(), 2)
+        self.assertEqual(all_products[1]["name"], "product-2")
+        self.assertEqual(all_products[0]["price"], 234.0)
