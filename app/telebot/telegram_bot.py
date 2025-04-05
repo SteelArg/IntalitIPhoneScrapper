@@ -1,9 +1,10 @@
 import telebot
 import requests
 
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
 from app.configuration import stores, telegram_bot_token, web_api_url
+import app.telebot.telegram_bot_prettify as prettify
 
 bot = telebot.TeleBot(telegram_bot_token)
 
@@ -18,8 +19,11 @@ def get_all_products(store: str):
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
+    bot.send_message(message.chat.id, "Привет!", reply_markup=ReplyKeyboardRemove())
+
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton(text="Просмотреть все товары", callback_data="read_from_store"))
+
     bot.send_message(message.chat.id, "Что вы хотите?", reply_markup=markup)
 
 
@@ -35,17 +39,20 @@ def read_from_store(call):
     for store in stores:
         store_buttons.append(InlineKeyboardButton(text=store, callback_data=f"read_from_store={store}"))
     markup.row(*store_buttons)
+
     bot.send_message(call.message.chat.id, "Выберите магазин", reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("read_from_store="))
 def read_from_store(call):
-    store_name = call.data.split("=")[1]
+    store = call.data.split("=")[1]
+    products_data = get_all_products(store)
+
     products_text = ""
-    products_data = get_all_products(store_name)
+    store_name = prettify.get_store(store)
 
     for product in products_data:
-        products_text += f"\n{product['name']} {str(product['price'])} грн; последн. счит. {str(product['date'])}"
+        products_text += "\n" + prettify.get_product_text(product)
     if products_text == "":
         products_text = "\nПока что нету :("
 
