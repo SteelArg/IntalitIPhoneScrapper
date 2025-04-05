@@ -7,5 +7,5 @@
 
   "stores" : ["rozetka", "comfy", "ctrs", "moyo", "foxtrot"],
 
-  "web_api_url" : "https://intalitiphonescrapper-production.up.railway.app/"
+  "web_api_url" : "https://intalitiphonescrapper-production-32e8.up.railway.app/"
 }
