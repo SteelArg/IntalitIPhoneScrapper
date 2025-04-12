@@ -1,3 +1,5 @@
+import app.telebot.telegram_bot_phrases as phrases
+
 phone_emoji = "📱"
 
 store_prettifies = {
@@ -48,11 +50,16 @@ def prettify_product_name(product_name):
 
     text += " ".join(prettified_words)
 
+    if text == "":
+        for word in words:
+            text += word[0].upper() + word[1:] + " "
+        text = text[0:-1]
+
     return text
 
 
 def prettify_product_price(product_price):
-    return f"{str(product_price)} грн."
+    return f"{str(product_price)} {phrases.abbreviation_currency}"
 
 
 def prettify_product_date(product_date):
@@ -63,4 +70,4 @@ def prettify_product_date(product_date):
 
     prettified_date = f"{date} {time}"
 
-    return f"посл. счит. {prettified_date}"
+    return f"{phrases.abbreviation_last_read} {prettified_date}"

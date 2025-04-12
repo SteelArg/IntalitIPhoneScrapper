@@ -5,6 +5,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeybo
 
 from app.configuration import stores, telegram_bot_token, web_api_url
 import app.telebot.telegram_bot_prettify as prettify
+import app.telebot.telegram_bot_phrases as phrases
 
 bot = telebot.TeleBot(telegram_bot_token)
 
@@ -19,17 +20,17 @@ def get_all_products(store: str):
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    bot.send_message(message.chat.id, "Привет!", reply_markup=ReplyKeyboardRemove())
+    bot.send_message(message.chat.id, phrases.text_start, reply_markup=ReplyKeyboardRemove())
 
     markup = InlineKeyboardMarkup()
-    markup.add(InlineKeyboardButton(text="Просмотреть все товары", callback_data="read_from_store"))
+    markup.add(InlineKeyboardButton(text=phrases.option_main_read, callback_data="read_from_store"))
 
-    bot.send_message(message.chat.id, "Что вы хотите?", reply_markup=markup)
+    bot.send_message(message.chat.id, phrases.text_menu, reply_markup=markup)
 
 
 @bot.message_handler(commands=['help'])
 def handle_help(message):
-    bot.reply_to(message, "Тебе ничто не поможет")
+    bot.reply_to(message, phrases.text_user_help)
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "read_from_store")
@@ -37,10 +38,10 @@ def read_from_store(call):
     markup = telebot.types.InlineKeyboardMarkup()
     store_buttons = []
     for store in stores:
-        store_buttons.append(InlineKeyboardButton(text=store, callback_data=f"read_from_store={store}"))
+        store_buttons.append(InlineKeyboardButton(text=prettify.get_store(store), callback_data=f"read_from_store={store}"))
     markup.row(*store_buttons)
 
-    bot.send_message(call.message.chat.id, "Выберите магазин", reply_markup=markup)
+    bot.send_message(call.message.chat.id, phrases.text_read_menu, reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("read_from_store="))
@@ -54,9 +55,9 @@ def read_from_store(call):
     for product in products_data:
         products_text += "\n" + prettify.get_product_text(product)
     if products_text == "":
-        products_text = "\nПока что нету :("
+        products_text = f"\n{phrases.text_read_no_products}"
 
-    bot.send_message(call.message.chat.id, f"Все продукты ({len(products_data)}) в магазине {store_name}:{products_text}")
+    bot.send_message(call.message.chat.id, f"{phrases.text_read_store} {store_name} ({len(products_data)}):{products_text}")
 
 
 def run_telegram_bot():
