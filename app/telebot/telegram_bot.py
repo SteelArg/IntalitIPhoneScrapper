@@ -56,7 +56,7 @@ def read_from_store(call):
     if products_text == "":
         products_text = "\nПока что нету :("
 
-    bot.send_message(call.message.chat.id, f"Все продукты в магазине {store_name}:{products_text}")
+    bot.send_message(call.message.chat.id, f"Все продукты ({len(products_data)}) в магазине {store_name}:{products_text}")
 
 
 def run_telegram_bot():
