@@ -5,7 +5,5 @@
 
   "db" : "products.db",
 
-  "stores" : ["rozetka", "comfy", "ctrs", "moyo", "foxtrot"],
-
-  "web_api_url" : "https://intalitiphonescrapper-production-32e8.up.railway.app/"
+  "stores" : ["rozetka", "comfy", "ctrs", "moyo", "foxtrot"]
 }

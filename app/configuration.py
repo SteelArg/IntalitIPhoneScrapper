@@ -1,8 +1,13 @@
 import os
+from dotenv import load_dotenv
 
 abs_path = os.getcwd()
 config_path = os.path.join(abs_path, "config")
 logs_path = os.path.join(abs_path, "logs")
+
+dotenv_path = os.path.join(abs_path, '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
 telegram_bot_token = ""
 product_names = {}
@@ -31,7 +36,7 @@ except FileNotFoundError:
 
 stores = config_data["stores"]
 
-web_api_url = config_data["web_api_url"]
+web_api_url = os.environ.get("WEB_API_URL")
 
 
 def get_db_path():

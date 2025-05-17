@@ -8,7 +8,9 @@ class JSONSerializerMeta(type):
 
         @classmethod
         def from_json(cls, json_data):
-            data = json.loads(json_data)
+            data = json_data
+            if not isinstance(json_data, dict):
+                data = json.loads(str(json_data))
             return cls(**data)
 
         namespaces["from_json"] = from_json

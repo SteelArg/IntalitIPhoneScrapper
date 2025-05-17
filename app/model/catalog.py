@@ -13,6 +13,7 @@ class Catalog(JSONSerializer):
         if self.store not in stores:
             raise ValueError(f"Store {self.store} does not exist")
 
+    @property
     def __dict__(self):
         store_dict = {
             "store": self.store,
