@@ -1,7 +1,6 @@
 {
   "product_names" : "product_names.json",
   "scrape_links" : "scrape_links.txt",
-  "telegram_token" : "telegram_bot_token.txt",
 
   "db" : "products.db",
 

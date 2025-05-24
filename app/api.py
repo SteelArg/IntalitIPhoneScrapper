@@ -25,7 +25,7 @@ class ProductDataRequest(Resource):
         args = dict(args)
         args["store"] = store
 
-        product = Product.from_json(args)
+        product = Product.from_dict(args)
         product.validate()
 
         db.insert_product(product)
@@ -37,7 +37,7 @@ class ProductDataRequest(Resource):
         args = dict(args)
         args["store"] = store
 
-        product = Product.from_json(args)
+        product = Product.from_dict(args)
         product.validate()
 
         db.update_product(product)

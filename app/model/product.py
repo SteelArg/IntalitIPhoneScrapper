@@ -1,7 +1,7 @@
 import time
 
 from app.configuration import stores
-from app.utils.json_serializer import JSONSerializer
+from app.utils.json_serializer import JsonSerializable
 
 
 # Get current date and time as a string
@@ -18,7 +18,12 @@ def format_product_name(old_name: str):
     return new_name
 
 
-class Product(JSONSerializer):
+class Product(JsonSerializable):
+    name: str
+    price: float
+    store: str
+    date: str
+
     def __init__(self, name, price, store, date=None):
         self.name = name
         self.price = price

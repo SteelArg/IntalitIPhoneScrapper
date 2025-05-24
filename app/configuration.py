@@ -5,22 +5,18 @@ abs_path = os.getcwd()
 config_path = os.path.join(abs_path, "config")
 logs_path = os.path.join(abs_path, "logs")
 
+if not os.path.exists(logs_path):
+    os.mkdir(logs_path)
+
 dotenv_path = os.path.join(abs_path, '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
-telegram_bot_token = ""
 product_names = {}
 scrape_links = []
 
 with open(os.path.join(abs_path, "config.json"), "r", encoding='utf-8') as file:
     config_data = eval(file.read())
-
-try:
-    with open(os.path.join(config_path, config_data['telegram_token']), "r", encoding='utf-8') as file:
-        telegram_bot_token = file.read()
-except FileNotFoundError:
-    pass
 
 try:
     with open(os.path.join(config_path, config_data['product_names']), "r", encoding='utf-8') as file:
@@ -37,6 +33,7 @@ except FileNotFoundError:
 stores = config_data["stores"]
 
 web_api_url = os.environ.get("WEB_API_URL")
+telegram_bot_token = os.environ.get("TELEBOT_TOKEN")
 
 
 def get_db_path():

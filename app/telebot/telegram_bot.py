@@ -54,7 +54,7 @@ def read_from_store(call):
     store_name = prettify.get_store(store)
 
     for product in products_data:
-        products_text += "\n" + prettify.get_product_text(eval(product))
+        products_text += "\n" + prettify.get_product_text(product)
     if products_text == "":
         products_text = f"\n{phrases.text_read_no_products}"
 

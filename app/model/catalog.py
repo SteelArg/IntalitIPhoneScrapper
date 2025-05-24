@@ -1,8 +1,14 @@
+from typing import List
+
 from app.configuration import stores
-from app.utils.json_serializer import JSONSerializer
+from app.utils.json_serializer import JsonSerializable
+from app.model.product import Product
 
 
-class Catalog(JSONSerializer):
+class Catalog(JsonSerializable):
+    store: str
+    products: List[Product]
+
     def __init__(self, store, products):
         self.store = store
         self.products = products
@@ -12,11 +18,3 @@ class Catalog(JSONSerializer):
     def validate(self):
         if self.store not in stores:
             raise ValueError(f"Store {self.store} does not exist")
-
-    @property
-    def __dict__(self):
-        store_dict = {
-            "store": self.store,
-            "products": [product.to_json() for product in self.products]
-        }
-        return store_dict
