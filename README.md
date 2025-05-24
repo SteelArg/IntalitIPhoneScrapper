@@ -19,9 +19,11 @@ Run `test_database.py` to test the datatbase.
 
 ## Telegram bot
 
-Add a secret file `telegram_bot_token.txt` containing your Telegram Bot Token to the `config` folder. Run `run_telebot.py`
+Run `run_telebot.py`
 
 Launches a **Telegram Bot** that allows users to interact with a **Web API**.
+
+Set the bot token in a "TELEBOT_TOKEN" environmental variable.
 
 
 ## Scrapper
@@ -41,5 +43,4 @@ There are some fields that point to certain files in `config` folder.
 
 You can edit the config files at your own risk.
 
-### config.json
-- `web_api_url` field contains a URL pointing to the **Web API**.
+Make an environmental variable "WEB_API_URL" that contains a URL pointing to the **Web API**.
