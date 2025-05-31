@@ -10,11 +10,10 @@ from app.configuration import get_db_path, scrape_links, web_api_url
 
 db = Database(get_db_path())
 
-logger = get_logger("scheduler")
+logger = get_logger("scheduler", True)
 
 
 def scrape_links_job():
-    print("Started scrapping links job")
     logger.info("Scrape links started")
     for link in scrape_links:
         product = scrape_product_link(link)
@@ -25,7 +24,6 @@ def scrape_links_job():
         post_request = requests.post(f"{web_api_url}/data/product/{product['store']}", data=product)
         logger.info(f"Post Request to API: {post_request.status_code}")
     logger.info("Scrape links finished")
-    print("Finished scrapping links job")
 
 
 def main_loop():

@@ -3,7 +3,7 @@ import logging
 from app.configuration import get_log_path_for
 
 
-def get_logger(logger_name):
+def get_logger(logger_name, log_to_console=False):
     formatter = logging.Formatter(
         fmt="%(asctime)s %(levelname)-8s %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
@@ -11,10 +11,16 @@ def get_logger(logger_name):
 
     logger = logging.getLogger(logger_name)
 
-    handler = logging.FileHandler(get_log_path_for(logger_name))
-    handler.setFormatter(formatter)
+    file_handler = logging.FileHandler(get_log_path_for(logger_name))
+    file_handler.setFormatter(formatter)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
 
     logger.setLevel(logging.INFO)
-    logger.addHandler(handler)
+    logger.addHandler(file_handler)
+
+    if log_to_console:
+        logger.addHandler(console_handler)
 
     return logger
