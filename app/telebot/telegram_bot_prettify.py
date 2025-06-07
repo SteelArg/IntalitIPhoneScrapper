@@ -14,16 +14,16 @@ name_prettifies = {
 
 
 def get_product_text(product):
-    name = prettify_product_name(product["name"])
-    price = prettify_product_price(product["price"])
-    date = prettify_product_date(product["date"])
+    name = prettify_product_name(product.name)
+    price = prettify_product_price(product.price)
+    date = prettify_product_date(product.date)
 
     text = f"{name} - {price};   {date}"
 
     return text
 
 
-def get_store(store: str):
+def prettify_store_name(store: str):
     if store_prettifies.__contains__(store):
         return store_prettifies[store]
 
