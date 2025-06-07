@@ -51,7 +51,8 @@ def read_from_store(call):
         products_text = f"\n{phrases.text_read_no_products}"
 
     bot.send_message(call.message.chat.id,
-                     f"{phrases.text_read_store} {store_name} ({len(catalog.products)}):{products_text}")
+                     f"{phrases.text_read_store} {store_name} ({len(catalog.products)}):{products_text}",
+                     parse_mode='Markdown')
 
 
 def run_telegram_bot():

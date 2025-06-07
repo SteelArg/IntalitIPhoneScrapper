@@ -14,7 +14,7 @@ name_prettifies = {
 
 
 def get_product_text(product):
-    name = prettify_product_name(product.name)
+    name = prettify_product_name(product.name, product.link)
     price = prettify_product_price(product.price)
     date = prettify_product_date(product.date)
 
@@ -33,7 +33,7 @@ def prettify_store_name(store: str):
     return prettified_store
 
 
-def prettify_product_name(product_name):
+def prettify_product_name(product_name, link = None):
     words = product_name.split("-")
 
     text = ""
@@ -55,7 +55,10 @@ def prettify_product_name(product_name):
             text += word[0].upper() + word[1:] + " "
         text = text[0:-1]
 
-    return text
+    if link is not None:
+        return f"[{text}]({link})"
+    else:
+        return text
 
 
 def prettify_product_price(product_price):

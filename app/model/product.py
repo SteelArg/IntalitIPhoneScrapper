@@ -22,12 +22,14 @@ class Product(JsonSerializable):
     name: str
     price: float
     store: str
+    link: str
     date: str
 
-    def __init__(self, name, price, store, date=None):
+    def __init__(self, name, price, store, link, date=None):
         self.name = name
         self.price = price
         self.store = store
+        self.link = link
         self.date = date
 
         self.validate()

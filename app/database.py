@@ -26,10 +26,10 @@ class Database:
         self.con.commit()
 
     def create_table_for_store(self, store):
-        self.cur.execute(f"CREATE TABLE IF NOT EXISTS {store} (name text, price real, date text)")
+        self.cur.execute(f"CREATE TABLE IF NOT EXISTS {store} (name text, price real, link text, date text)")
 
     def insert_product(self, product: Product):
-        self.cur.execute(f"INSERT INTO {product.store} VALUES ('{product.name}', {str(product.price)}, '{product.date}')")
+        self.cur.execute(f"INSERT INTO {product.store} VALUES ('{product.name}', {str(product.price)}, '{product.link}', '{product.date}')")
         self.con.commit()
 
     def update_product(self, product: Product):
@@ -44,7 +44,7 @@ class Database:
         if fetch.__len__() == 0:
             return None
         else:
-            product = Product(name, float(fetch[0][1]), store, fetch[0][2])
+            product = Product(name, float(fetch[0][1]), store, fetch[0][2], fetch[0][3])
             return product
 
     def get_all_products(self, store):
