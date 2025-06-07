@@ -4,7 +4,7 @@ WORKDIR /flask-app
 
 COPY requirements.txt /flask-app/
 
-COPY app/api/api.py /flask-app/app/api/
+COPY app/api/ /flask-app/app/api/
 COPY app/database.py app/configuration.py app/__init__.py /flask-app/app/
 COPY app/model/ /flask-app/app/model/
 

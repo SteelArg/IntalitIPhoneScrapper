@@ -34,6 +34,10 @@ stores = config_data["stores"]
 
 web_api_url = os.environ.get("WEB_API_URL")
 telegram_bot_token = os.environ.get("TELEBOT_TOKEN")
+admin_password = os.environ.get("ADMIN_PASSWORD")
+
+if admin_password is None:
+    raise ValueError("Set the Admin password in the environmental variables!")
 
 
 def get_db_path():
