@@ -17,10 +17,11 @@ class FoxtrotScrapper(Scrapper):
     def scrape(self):
         super().scrape()
 
-        script = self.soup.find("script", {"type": "application/ld+json"})
-        if script:
-            data = json.loads(script.string)
-            if "hasVariant" in data:
-                variant = data["hasVariant"][0]
-                self.name = variant.get("name", "Не вказано")
-                self.price = variant.get("offers", {}).get("price", 0)
+        script_tag = self.soup.find("script", {"type": "application/ld+json"})
+        if script_tag:
+            data = json.loads(script_tag.string)
+
+            variant = data
+
+            self.name = variant.get("name", None)
+            self.price = variant.get("offers", {}).get("price", 0)

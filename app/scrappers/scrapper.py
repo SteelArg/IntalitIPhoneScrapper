@@ -13,11 +13,12 @@ default_headers = {
 
 
 class Scrapper:
+    soup: BeautifulSoup
+
     def __init__(self, product_url, headers=default_headers):
         self.url = product_url
         self.headers = headers
         self.response = None
-        self.soup = None
         self.store = None
         self.name = None
         self.price = None

@@ -19,11 +19,13 @@ class ComfyScrapper(Scrapper):
     def scrape(self):
         super().scrape()
 
-        script_tag = self.soup.find("script", type="application/ld+json")
+        script_tag = self.soup.find("script", {"data-qmeta": "ldProduct"})#type="application/ld+json")
+        print(script_tag)
         if script_tag:
             json_data = json.loads(script_tag.string)
+            print(json_data)
             self.price = json_data.get("offers", {}).get("price", 0)
-            self.name = json_data.get("name", "Назва не знайдена")
+            self.name = json_data.get("name", None)
         else:
-            self.name = "Не знайдена"
+            self.name = None
             self.price = 0
