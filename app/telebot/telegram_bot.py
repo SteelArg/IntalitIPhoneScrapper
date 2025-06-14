@@ -55,5 +55,15 @@ def read_from_store(call):
                      parse_mode='Markdown')
 
 
+@bot.message_handler(func=lambda m: True)
+def search(message):
+    search_keywords = message.text.lower().split(" ")
+    search_result = requests.get_search_result(search_keywords)
+
+    bot.send_message(message.chat.id,
+                     prettify.get_search_result_text(search_result, search_keywords),
+                     parse_mode='Markdown')
+
+
 def run_telegram_bot():
     bot.polling(non_stop=True)

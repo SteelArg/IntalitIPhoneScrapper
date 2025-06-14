@@ -1,6 +1,7 @@
 import json
 from typing import get_origin, get_args
 
+
 class JsonSerializable:
     def to_json(self):
         return json.dumps(self.to_dict())

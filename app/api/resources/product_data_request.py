@@ -6,7 +6,7 @@ from app.api.api_authentication import auth
 
 from app.model.product import Product
 
-from app.api.api import db
+from app.api.api_db import db
 
 
 class ProductDataRequest(Resource):
@@ -14,7 +14,7 @@ class ProductDataRequest(Resource):
         product = db.get_product(store, name)
         if product is None:
             return None, 404
-        return eval(product.to_json()), 200
+        return product.to_dict(), 200
 
     @auth.login_required
     def post(self, store: str):
@@ -27,7 +27,7 @@ class ProductDataRequest(Resource):
 
         db.insert_product(product)
 
-        return eval(product.to_json()), 200
+        return product.to_dict(), 200
 
     @auth.login_required
     def put(self, store: str):
@@ -40,7 +40,7 @@ class ProductDataRequest(Resource):
 
         db.update_product(product)
 
-        return eval(product.to_json()), 200
+        return product.to_dict(), 200
 
     @auth.login_required
     def delete(self, store: str):

@@ -13,6 +13,19 @@ name_prettifies = {
 }
 
 
+def get_search_result_text(search_result, search_keywords):
+    search_text = f"{phrases.text_search_result} {'; '.join(search_keywords)}:"
+
+    products_text = ""
+    for product in search_result.products:
+        products_text += "\n" + get_product_text(product)
+
+    if search_result.products.__len__() == 0:
+        products_text = phrases.text_search_result_none
+
+    return f"{search_text}\n{products_text}"
+
+
 def get_product_text(product):
     name = prettify_product_name(product.name, product.link)
     price = prettify_product_price(product.price)
@@ -33,7 +46,7 @@ def prettify_store_name(store: str):
     return prettified_store
 
 
-def prettify_product_name(product_name, link = None):
+def prettify_product_name(product_name, link=None):
     words = product_name.split("-")
 
     text = ""

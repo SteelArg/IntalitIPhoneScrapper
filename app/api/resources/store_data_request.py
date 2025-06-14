@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from app.api.api import db
+from app.api.api_db import db
 
 
 class StoreDataRequest(Resource):
@@ -10,4 +10,4 @@ class StoreDataRequest(Resource):
         if catalog is None:
             return None, 404
 
-        return eval(catalog.to_json()), 200
+        return catalog.to_dict(), 200
