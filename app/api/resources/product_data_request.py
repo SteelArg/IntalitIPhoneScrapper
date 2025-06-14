@@ -6,10 +6,7 @@ from app.api.api_authentication import auth
 
 from app.model.product import Product
 
-from app.database import Database
-from app.configuration import get_db_path
-
-db = Database(get_db_path())
+from app.api.api import db
 
 
 class ProductDataRequest(Resource):
@@ -52,13 +49,3 @@ class ProductDataRequest(Resource):
         db.delete_product(store, args["name"])
 
         return {}, 200
-
-
-class StoreDataRequest(Resource):
-    def get(self, store):
-        catalog = db.get_all_products(store)
-
-        if catalog is None:
-            return None, 404
-
-        return eval(catalog.to_json()), 200

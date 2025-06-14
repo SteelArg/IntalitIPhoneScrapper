@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 auth = HTTPBasicAuth()
 
 users = {
-    "Admin" : generate_password_hash(admin_password)
+    "Admin": generate_password_hash(admin_password)
 }
 
 
